@@ -47,7 +47,7 @@ public class PlayerCharacter {
     }
     
     public void setHP(int newHP) {
-        HP = newHP;
+        maxHP = newHP;
     }
     
     public void setAtk(int newAtk) {
@@ -55,6 +55,6 @@ public class PlayerCharacter {
     }
     
     public void setFP(int newFP) {
-        FP = newFP;
+        maxFP = newFP;
     }
 }
