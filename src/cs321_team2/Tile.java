@@ -24,14 +24,14 @@ public class Tile {
         enemy = false;
     }
     
-    Tile(String tileType)
+    Tile(String name)
     {
-        this.tileType = tileType;
+        tileType = name;
     }
     
-    void setTileType(String tileType)
+    void setTileType(String name)
     {
-        this.tileType = tileType;
+        tileType = name;
     }
     
     String getTileType()
@@ -39,24 +39,24 @@ public class Tile {
         return tileType;
     }
     
-    void setPlayer(boolean player)
+    void setPlayer(boolean bool)
     {
-        this.player = player;
+        player = bool;
     }
     
-    void setChest(boolean chest)
+    void setChest(boolean bool)
     {
-        this.chest = chest;
+        chest = bool;
     }
     
-    void setEnemy(boolean enemy)
+    void setEnemy(boolean bool)
     {
-        this.enemy = enemy;
+        enemy = bool;
     }
     
-    void setDoor(boolean door)
+    void setDoor(boolean bool)
     {
-        this.door = door;
+        door = bool;
     }
     
     boolean hasChest()
