@@ -28,8 +28,7 @@ public class Dungeon {
     void setEmptyDungeon()//sets all indexes of the dungeon to an empty tile
     {
         for(int i = 0; i < x; i++)
-        {
-            
+        { 
             for(int f = 0; f < y; f++)
             {
                 for(int s = 0; s < z; s++)
@@ -86,18 +85,18 @@ public class Dungeon {
     
    void DungeonLogic(Tile current)//Dungeon logic based on player location
    {
-       if((current.player && current.chest) == true)
+       if((current.hasPlayer() && current.hasChest()) == true)
        {
            //add random item to inventory
        }
        
-       if((current.player && current.door) == true)
+       if((current.hasPlayer() && current.hasDoor()) == true)
        {
            level = level + 1;
            setLevel();
        }
        
-       if((current.player && current.enemy) == true)
+       if((current.hasPlayer() && current.hasEnemy()) == true)
        {
            //add battle stuff
        }
