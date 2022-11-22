@@ -11,10 +11,17 @@ package cs321_team2;
 public class Tile {
  
     String tileType;//What type of tile it is(Ex. character, chest, etc.)
+    boolean player;
+    boolean chest;
+    boolean enemy;
+    boolean door;
     
     Tile()
     {
         tileType = "";
+        player = false;
+        chest = false;
+        enemy = false;
     }
     
     Tile(String tileType)
@@ -31,6 +38,38 @@ public class Tile {
     {
         return tileType;
     }
-   
+    
+    void setPlayer(boolean player)
+    {
+        this.player = player;
+    }
+    
+    void setChest(boolean chest)
+    {
+        this.chest = chest;
+    }
+    
+    void setEnemy(boolean enemy)
+    {
+        this.enemy = enemy;
+    }
+    
+    void setDoor(boolean door)
+    {
+        this.door = door;
+    }
+    
+    boolean hasChest()
+    {
+        return chest;
+    }
+    boolean hasPlayer()
+    {
+        return player;
+    }
+    boolean hasEnemy()
+    {
+        return enemy;
+    }
     
 }
