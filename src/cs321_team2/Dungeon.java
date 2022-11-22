@@ -27,13 +27,13 @@ public class Dungeon {
     
     void setEmptyDungeon()//sets all indexes of the dungeon to an empty tile
     {
-        for(int i = 0; i < x-1; i++)
+        for(int i = 0; i < x; i++)
         {
-            for(int f = 0; f < y-1; f++)
+            for(int f = 0; f < y; f++)
             {
-                for(int s = 0; s < z-1; s++)
+                for(int s = 0; s < z; s++)
                 {
-                    tilemap[x][y][z] = new Tile();
+                    tilemap[i][f][s] = new Tile();
                 }
             }
         }
@@ -41,13 +41,13 @@ public class Dungeon {
     
     void readDungeon()//print the tiletype of each tile in the dungeon
     {
-        for(int i = 0; i < x-1; i++)
+        for(int i = 0; i < x; i++)
         {
-            for(int f = 0; f < y-1; f++)
+            for(int f = 0; f < y; f++)
             {
-                for(int s = 0; s < z-1; s++)
+                for(int s = 0; s < z; s++)
                 {
-                    System.out.println(tilemap[x][y][level].tileType);
+                    System.out.println(tilemap[i][f][s].getTileType());
                 }
             }
         }
@@ -58,14 +58,13 @@ public class Dungeon {
         try{
             File f1 = new File(Door());
             Scanner sc = new Scanner(f1);
-            for(int i = 0; i < x-1; i++)
+            for(int i = 0; i < x; i++)
             {
-                for(int f = 0; f < y-1; f++)
+                for(int f = 0; f < y; f++)
                 {
-                    for(int s = 0; s < z-1; s++)
+                    for(int s = 0; s < z; s++)
                     {
-                        tilemap[x][y][z] = new Tile();
-                        tilemap[x][y][level].tileType = sc.next();
+                        tilemap[i][f][s].setTileType(sc.next());
                     }
                 }
             }
