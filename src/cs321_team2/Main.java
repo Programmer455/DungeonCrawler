@@ -15,7 +15,13 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
        new TitleScreen();
+       Dungeon test = new Dungeon(4, 4, 1);
+       test.setEmptyDungeon();
+       test.setLevel();
+       test.readDungeon();
+       
     }
     
 }
