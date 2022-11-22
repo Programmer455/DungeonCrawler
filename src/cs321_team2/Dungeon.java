@@ -54,6 +54,18 @@ public class Dungeon {
         }
     }
     
+    void readLevel()//print the tiletype of wach tile in the current level
+    {
+        for(int i = 0; i < x; i++)
+        {
+            for(int f = 0; f < y; f++)
+            {
+
+                 System.out.println(tilemap[i][f][level].getTileType());
+            }
+        }
+    }
+    
     void setLevel()//fill the dungeon with a tile type based on level
     {
         try{
@@ -63,10 +75,7 @@ public class Dungeon {
             {
                 for(int f = 0; f < y; f++)
                 {
-                    for(int s = 0; s < z; s++)
-                    {
-                        tilemap[i][f][s].setTileType(sc.next());
-                    }
+                    tilemap[i][f][level].setTileType(sc.next());
                 }
             }
         }catch(Exception ex)
