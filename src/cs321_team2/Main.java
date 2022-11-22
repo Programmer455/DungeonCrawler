@@ -19,7 +19,7 @@ public class Main {
        Dungeon test = new Dungeon(4, 4, 1);
        test.setEmptyDungeon();
        test.setLevel();
-       test.readDungeon();
+       test.readLevel();
        
     }
     
