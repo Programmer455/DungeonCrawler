@@ -52,6 +52,7 @@ public class Tile {
     void setEnemy(boolean bool)
     {
         enemy = bool;
+        
     }
     
     void setDoor(boolean bool)
