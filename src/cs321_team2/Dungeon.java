@@ -60,8 +60,10 @@ public class Dungeon {
             for(int f = 0; f < y; f++)
             {
 
-                 System.out.println(tilemap[i][f][level].getTileType());
+                 System.out.print(tilemap[i][f][level].getTileType() + " ");
             }
+            
+            System.out.println();
         }
     }
     
