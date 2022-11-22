@@ -10,11 +10,11 @@ package cs321_team2;
  */
 public class Tile {
  
-    String tileType;//What type of tile it is(Ex. character, chest, etc.)
-    boolean player;
-    boolean chest;
-    boolean enemy;
-    boolean door;
+    private String tileType;//What type of tile it is(Ex. character, chest, etc.)
+    private boolean player;
+    private boolean chest;
+    private boolean enemy;
+    private boolean door;
     
     Tile()
     {
@@ -70,6 +70,11 @@ public class Tile {
     boolean hasEnemy()
     {
         return enemy;
+    }
+    
+    boolean hasDoor()
+    {
+        return door;
     }
     
 }
