@@ -29,6 +29,7 @@ public class Dungeon {
     {
         for(int i = 0; i < x; i++)
         {
+            
             for(int f = 0; f < y; f++)
             {
                 for(int s = 0; s < z; s++)
