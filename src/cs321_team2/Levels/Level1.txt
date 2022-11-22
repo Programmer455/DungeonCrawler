@@ -1,4 +1,4 @@
 floor floor floor floor
-floor rock floor floor
+floor floor floor floor
 wall wall wall wall
 floor floor floor floor
