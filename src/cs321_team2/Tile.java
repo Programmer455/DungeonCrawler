@@ -10,27 +10,71 @@ package cs321_team2;
  */
 public class Tile {
  
-    String tileType;//What type of tile it is(Ex. character, chest, etc.)
+    private String tileType;//What type of tile it is(Ex. character, chest, etc.)
+    private boolean player;
+    private boolean chest;
+    private boolean enemy;
+    private boolean door;
     
     Tile()
     {
         tileType = "";
+        player = false;
+        chest = false;
+        enemy = false;
     }
     
-    Tile(String tileType)
+    Tile(String name)
     {
-        this.tileType = tileType;
+        tileType = name;
     }
     
-    void setTileType(String tileType)
+    void setTileType(String name)
     {
-        this.tileType = tileType;
+        tileType = name;
     }
     
     String getTileType()
     {
         return tileType;
     }
-   
+    
+    void setPlayer(boolean bool)
+    {
+        player = bool;
+    }
+    
+    void setChest(boolean bool)
+    {
+        chest = bool;
+    }
+    
+    void setEnemy(boolean bool)
+    {
+        enemy = bool;
+    }
+    
+    void setDoor(boolean bool)
+    {
+        door = bool;
+    }
+    
+    boolean hasChest()
+    {
+        return chest;
+    }
+    boolean hasPlayer()
+    {
+        return player;
+    }
+    boolean hasEnemy()
+    {
+        return enemy;
+    }
+    
+    boolean hasDoor()
+    {
+        return door;
+    }
     
 }
