@@ -79,6 +79,7 @@ public class Dungeon {
                     tilemap[i][f][level].setTileType(sc.next());
                 }
             }
+            
         }catch(Exception ex)
         {
             System.out.println(ex.toString());
@@ -110,14 +111,14 @@ public class Dungeon {
        switch(level)
        {
            case 0 -> {
-               return "D:\\Netbeans\\NetBeans-15\\Dungeon\\DungeonCrawler\\src\\cs321_team2\\Levels\\Level1.txt";
+               return System.getProperty("user.dir") + "\\src\\cs321_team2\\Levels\\Level1.txt";
             }
            case 1 -> {
-               return "D:\\Netbeans\\NetBeans-15\\Dungeon\\DungeonCrawler\\src\\cs321_team2\\Levels\\Level2.txt";
+               return System.getProperty("user.dir") + "\\src\\cs321_team2\\Levels\\Level2.txt";
             }
            default ->
                    {
-                       return("D:\\Netbeans\\NetBeans-15\\Dungeon\\DungeonCrawler\\src\\cs321_team2\\Levels\\Level1.txt");
+                       return System.getProperty("user.dir") + "\\src\\cs321_team2\\Levels\\Level1.txt";
                    }
                 
        }
