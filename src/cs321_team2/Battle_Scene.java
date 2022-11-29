@@ -12,7 +12,7 @@ import javax.swing.*;
  */
 public class Battle_Scene {
     
-    Battle_Scene(){
+    public Battle_Scene(){
         JPanel panel = new JPanel(); //creates a panel 
         panel.setLayout(null);
         JFrame frame = new JFrame("Battle");
