@@ -14,18 +14,22 @@ public class TitlePanel extends JPanel implements ActionListener {
     
     private final GridBagConstraints gbc;
     
+    // Components
     private final JLabel descLabel = new JLabel("Unnamed Dungeon Crawler");
     private final JButton startButton = new JButton("Start Game");
     private final JButton leaderboardButton = new JButton("Leaderboard");
     private final JButton creditsButton = new JButton("Credits");
     private final JButton exitButton = new JButton("Exit Game");
     
-    
+    // Constructor
     public TitlePanel(MenuFrame parentFrame) {
+        
+        // Create Panel Layout
         this.parentFrame = parentFrame;
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         
+        // Setting Fonts and Colors
         descLabel.setFont(new Font("Verdana", Font.BOLD, 30));
         
         startButton.setFont(new Font("Verdana", Font.BOLD, 20));
@@ -48,6 +52,7 @@ public class TitlePanel extends JPanel implements ActionListener {
         addActionEvents();
     }
     
+    // Adds Buttons, Labels, etc. to Panel
     private void addElements() {
         
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -90,6 +95,7 @@ public class TitlePanel extends JPanel implements ActionListener {
         this.add(exitButton, gbc);
     }
     
+    // Adds ActionListener to Buttons
     private void addActionEvents() {
         startButton.addActionListener(this);
         leaderboardButton.addActionListener(this);
@@ -97,17 +103,22 @@ public class TitlePanel extends JPanel implements ActionListener {
         exitButton.addActionListener(this);
     }
 
+    // Detects Actions
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Moves to CharacterSelectPanel
         if (e.getSource() == startButton) {
             parentFrame.openCharacterSelect();
         }
+        // Moves to LeaderboardPanel
         else if (e.getSource() == leaderboardButton) {
             
         }
+        // Moves to CreditsPanel
         else if (e.getSource() == creditsButton) {
             
         }
+        // Exits Program
         else if (e.getSource() == exitButton) {
             parentFrame.exitGame();
         }

@@ -14,6 +14,7 @@ public class MenuFrame extends JFrame {
     
     public MenuFrame() {
         
+        // Sets Initial Panel to TitlePanel
         this.getContentPane().add(panel);
         this.setSize(1200, 700);
         this.setResizable(false);
@@ -21,6 +22,7 @@ public class MenuFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+    // Sets Current Panel to TitlePanel
     public void openTitle() {
         
         this.getContentPane().removeAll();
@@ -36,6 +38,7 @@ public class MenuFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+    // Sets Current Panel to CharacterSelectPanel
     public void openCharacterSelect() {
         
         this.getContentPane().removeAll();
@@ -51,14 +54,17 @@ public class MenuFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+    // Sets Current Panel to LeaderboardPanel
     public void openLeaderboard() {
         
     }
     
+    // Sets Current Panel to CreditsPanel
     public void openCredits() {
         
     }
     
+    // Exits Program
     public void exitGame() {
         this.dispose();
     }
