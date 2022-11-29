@@ -29,17 +29,20 @@ public class CharacterSelectPanel extends JPanel implements ActionListener {
     private final Dimension maxTextFieldDim = new Dimension(600, 30);
     
     
-    
+    // Constructor
     public CharacterSelectPanel(MenuFrame parentFrame) {
         
+        // Create Panel Layout
         this.parentFrame = parentFrame;
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         
+        // Add RadioButtons to ButtonGroup
         classes.add(warriorButton);
         classes.add(mageButton);
         classes.add(paladinButton);
         
+        // Set Fonts and Colors
         descLabel.setFont(new Font("Verdana", Font.BOLD, 30));
         nameLabel.setFont(new Font("Verdana", Font.BOLD, 20));
         archetypeLabel.setFont(new Font("Verdana", Font.BOLD, 20));
@@ -62,6 +65,7 @@ public class CharacterSelectPanel extends JPanel implements ActionListener {
         addActionEvents();
     }
     
+    // Add Buttons, Labels, etc. to Panel
     private void addElements() {
         
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -112,6 +116,7 @@ public class CharacterSelectPanel extends JPanel implements ActionListener {
         this.add(enterButton, gbc);
     }
     
+    // Add ActionListener to Buttons
     private void addActionEvents() {
         warriorButton.addActionListener(this);
         mageButton.addActionListener(this);
@@ -120,8 +125,10 @@ public class CharacterSelectPanel extends JPanel implements ActionListener {
         backButton.addActionListener(this);
     }
 
+    // Detects Actions
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Create Character object and Move to GameFrame
         if (e.getSource() == enterButton) {
             /**
             if (warriorButton.isSelected()) {
@@ -130,6 +137,7 @@ public class CharacterSelectPanel extends JPanel implements ActionListener {
             }
             */
         }
+        // Return to TitlePanel
         else if (e.getSource() == backButton) {
             parentFrame.openTitle();
         }
