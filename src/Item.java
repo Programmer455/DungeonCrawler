@@ -5,7 +5,7 @@
 
 /**
  *
- * @author hoods
+ * @author Michael Hood
  */
 public class Item {
     //name, description and effect of the item
