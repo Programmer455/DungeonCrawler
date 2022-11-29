@@ -16,10 +16,11 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
        new TitleScreen();
-       Dungeon test = new Dungeon(4, 4, 1);
+       Dungeon test = new Dungeon(3, 3, 1);
        test.setEmptyDungeon();
        test.setLevel();
        test.readLevel();
+       new Dungeon_UI(test);
        
     }
     
