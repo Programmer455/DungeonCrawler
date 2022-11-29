@@ -6,75 +6,76 @@ package cs321_team2;
 
 /**
  *
- * @author keani
+ * @author Keenan Coleman
  */
 public class Tile {
  
     private String tileType;//What type of tile it is(Ex. character, chest, etc.)
-    private boolean player;
-    private boolean chest;
-    private boolean enemy;
-    private boolean door;
+    private boolean hasPlayer;
+    private boolean hasChest;
+    private String enemyType;
+    private boolean hasDoor;
     
-    Tile()
+    public Tile()
     {
-        tileType = "";
-        player = false;
-        chest = false;
-        enemy = false;
+        tileType = "null";
+        hasPlayer = false;
+        hasChest = false;
+        enemyType = "null";
+        hasDoor = false;
     }
     
-    Tile(String name)
-    {
-        tileType = name;
-    }
-    
-    void setTileType(String name)
+    public void setTileType(String name)
     {
         tileType = name;
     }
     
-    String getTileType()
+    public String getTileType()
     {
         return tileType;
     }
     
-    void setPlayer(boolean bool)
+    public void setPlayer(boolean bool)
     {
-        player = bool;
+        hasPlayer = bool;
     }
     
-    void setChest(boolean bool)
+    public void setChest(boolean bool)
     {
-        chest = bool;
+        hasChest = bool;
     }
     
-    void setEnemy(boolean bool)
+    public void setEnemyType(String type)
     {
-        enemy = bool;
+        enemyType = type;
     }
     
-    void setDoor(boolean bool)
+    public void setDoor(boolean bool)
     {
-        door = bool;
+        hasDoor = bool;
     }
     
-    boolean hasChest()
+    public boolean hasChest()
     {
-        return chest;
+        return hasChest;
     }
-    boolean hasPlayer()
+    public boolean hasPlayer()
     {
-        return player;
+        return hasPlayer;
     }
-    boolean hasEnemy()
+    public boolean hasEnemy()
     {
-        return enemy;
+        if (enemyType.equals("null")) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
     
-    boolean hasDoor()
+    public boolean hasDoor()
     {
-        return door;
+        return hasDoor;
     }
     
 }

@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package model;
 
+import cs321_team2.*;
 /**
  *
  * @author Sawyer Neal
@@ -17,6 +13,9 @@ public class PlayerCharacter {
     private int maxFP;
     private int currentFP;
     private int Atk;
+    private int floor;
+    private int posX;
+    private int posY;
     //private Equipment armor;
     //private Equipment weapon;
     //private Item inventory[10];
@@ -48,6 +47,34 @@ public class PlayerCharacter {
         return Atk;
     }
     
+    public int getFloor() {
+        return floor;
+    }
+    
+    public String getFloorAsString() {
+        return String.valueOf(floor);
+    }
+    
+    public int getScore() {
+        return archetype.getXP();
+    }
+    
+    public String getScoreAsString() {
+        return String.valueOf(archetype.getXP());
+    }
+    
+    public int getPosX() {
+        return posX;
+    }
+    
+    public int getPosY() {
+        return posY;
+    }
+    
+    public String getArchetype() {
+        return archetype.getArchetype();
+    }
+    
     public void setHP(int newHP) {
         maxHP = newHP;
     }
@@ -58,5 +85,14 @@ public class PlayerCharacter {
     
     public void setFP(int newFP) {
         maxFP = newFP;
+    }
+    
+    public void setFloor(int newFloor) {
+        floor = newFloor;
+    }
+    
+    public void setPos(int x, int y) {
+        posX = x;
+        posY = y;
     }
 }

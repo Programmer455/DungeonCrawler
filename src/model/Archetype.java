@@ -10,7 +10,7 @@ package model;
  * @author Sawyer Neal
  */
 public class Archetype {
-    private String name;
+    private final String name;
     private int XP;
     private int level;
     
@@ -18,6 +18,14 @@ public class Archetype {
         name = newName;
         XP = 0;
         level = 1;
+    }
+    
+    public int getXP() {
+        return XP;
+    }
+    
+    public String getArchetype() {
+        return name;
     }
     
     public void levelUp() {

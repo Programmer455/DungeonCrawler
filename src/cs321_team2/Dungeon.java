@@ -6,26 +6,89 @@ package cs321_team2;
 
 import java.io.*;
 import java.util.*;
+import model.*;
+import cs321_team2.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
- * @author keani
+ * @author Keenan Coleman
  */
 public class Dungeon {
     
-    int x, y, z;//sets the size of the Dungeon
-    int level;
-    Tile tilemap[][][];
+    private int floor;
+    public Tile tilemap[][] = new Tile[32][32];
+    private Enemy enemies[] = new Enemy[16];
     
-    Dungeon(int x, int y, int z)//Makes dungeon based on x, y, z
-    {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        level = 0;
-        tilemap = new Tile[x][y][z];
+    public Dungeon(PlayerCharacter pc, int floor) {
+        this.floor = floor;
+        try {
+            setDungeon(pc);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Dungeon.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    void setEmptyDungeon()//sets all indexes of the dungeon to an empty tile
+    private void setDungeon(PlayerCharacter pc) throws FileNotFoundException {
+        
+        File fl = new File(System.getProperty("user.dir") + "\\src\\cs321_team2\\Levels\\Level" + String.valueOf(floor) + ".txt");
+        Scanner sc = new Scanner(fl);
+        
+        for (int i = 0; i < 32; i++) {
+            for (int j = 0; j < 32; j++) {
+                if (sc.hasNext()) {
+                    String type = sc.next();
+                    if (type.equals("endl")) {
+                        j = 32;
+                    }
+                    else if (type.equals("start")) {
+                        tilemap[j][i] = new Tile();
+                        tilemap[j][i].setTileType(type);
+                        tilemap[j][i].setPlayer(true);
+                        pc.setPos(j, i);
+                    }
+                    else if (type.equals("chest")) {
+                        tilemap[j][i] = new Tile();
+                        tilemap[j][i].setTileType(type);
+                        tilemap[j][i].setChest(true);
+                    }
+                    else if (type.equals("door")) {
+                        tilemap[j][i] = new Tile();
+                        tilemap[j][i].setTileType(type);
+                        tilemap[j][i].setDoor(true);
+                    }
+                    else if (type.equals("goblin")) {
+                        tilemap[j][i] = new Tile();
+                        tilemap[j][i].setTileType(type);
+                        tilemap[j][i].setEnemyType("goblin");
+                    }
+                    else if (type.equals("hobgoblin")) {
+                        tilemap[j][i] = new Tile();
+                        tilemap[j][i].setTileType(type);
+                        tilemap[j][i].setEnemyType("hobgoblin");
+                    }
+                    else {
+                        tilemap[j][i] = new Tile();
+                        tilemap[j][i].setTileType(type);
+                    }
+                }
+                else {
+                    j = 32;
+                    i = 32;
+                }
+                
+                
+            }
+        }
+    }
+    
+    public void moveEnemies() {
+        
+    }
+    
+    /**
+    public void setEmptyDungeon()//sets all indexes of the dungeon to an empty tile
     {
         for(int i = 0; i < x; i++)
         { 
@@ -39,7 +102,7 @@ public class Dungeon {
         }
     }
     
-    void readDungeon()//print the tiletype of each tile in the dungeon
+    public void readDungeon()//print the tiletype of each tile in the dungeon
     {
         for(int i = 0; i < x; i++)
         {
@@ -53,7 +116,7 @@ public class Dungeon {
         }
     }
     
-    void readLevel()//print the tiletype of wach tile in the current level
+    public void readLevel()//print the tiletype of wach tile in the current level
     {
         for(int i = 0; i < x; i++)
         {
@@ -67,7 +130,7 @@ public class Dungeon {
         }
     }
     
-    void setLevel()//fill the dungeon with a tile type based on level
+    public void setLevel()//fill the dungeon with a tile type based on level
     {
         try{
             File f1 = new File(Door());
@@ -86,7 +149,7 @@ public class Dungeon {
         }
     }
     
-   void DungeonLogic(Tile current)//Dungeon logic based on player location
+   public void DungeonLogic(Tile current)//Dungeon logic based on player location
    {
        if((current.hasPlayer() && current.hasChest()) == true)
        {
@@ -106,7 +169,7 @@ public class Dungeon {
 
    }
    
-   String Door()//used to choose which file to read from
+   public String Door()//used to choose which file to read from
    {
        switch(level)
        {
@@ -123,4 +186,6 @@ public class Dungeon {
                 
        }
    }
+   */
+    
 }

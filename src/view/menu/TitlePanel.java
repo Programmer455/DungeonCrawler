@@ -18,7 +18,6 @@ public class TitlePanel extends JPanel implements ActionListener {
     private final JLabel descLabel = new JLabel("Unnamed Dungeon Crawler");
     private final JButton startButton = new JButton("Start Game");
     private final JButton leaderboardButton = new JButton("Leaderboard");
-    private final JButton creditsButton = new JButton("Credits");
     private final JButton exitButton = new JButton("Exit Game");
     
     // Constructor
@@ -39,10 +38,6 @@ public class TitlePanel extends JPanel implements ActionListener {
         leaderboardButton.setFont(new Font("Verdana", Font.BOLD, 20));
         leaderboardButton.setBackground(Color.RED);
         leaderboardButton.setForeground(Color.WHITE);
-        
-        creditsButton.setFont(new Font("Verdana", Font.BOLD, 20));
-        creditsButton.setBackground(Color.RED);
-        creditsButton.setForeground(Color.WHITE);
         
         exitButton.setFont(new Font("Verdana", Font.BOLD, 20));
         exitButton.setBackground(Color.RED);
@@ -85,13 +80,6 @@ public class TitlePanel extends JPanel implements ActionListener {
         gbc.gridheight = 2;
         gbc.gridwidth = 3;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        this.add(creditsButton, gbc);
-        
-        gbc.gridx = 2;
-        gbc.gridy = 13;
-        gbc.gridheight = 2;
-        gbc.gridwidth = 3;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
         this.add(exitButton, gbc);
     }
     
@@ -99,7 +87,6 @@ public class TitlePanel extends JPanel implements ActionListener {
     private void addActionEvents() {
         startButton.addActionListener(this);
         leaderboardButton.addActionListener(this);
-        creditsButton.addActionListener(this);
         exitButton.addActionListener(this);
     }
 
@@ -112,10 +99,6 @@ public class TitlePanel extends JPanel implements ActionListener {
         }
         // Moves to LeaderboardPanel
         else if (e.getSource() == leaderboardButton) {
-            
-        }
-        // Moves to CreditsPanel
-        else if (e.getSource() == creditsButton) {
             
         }
         // Exits Program

@@ -128,14 +128,20 @@ public class CharacterSelectPanel extends JPanel implements ActionListener {
     // Detects Actions
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Create Character object and Move to GameFrame
+        // Create Character object and Move to DungeonFrame
         if (e.getSource() == enterButton) {
-            /**
             if (warriorButton.isSelected()) {
-                PlayerCharacter PC = new PlayerCharacter(nameTextField.getText(), "Warrior");
-                
+                PlayerCharacter pc = new PlayerCharacter(nameTextField.getText(), "Warrior");
+                parentFrame.openGame(pc);
             }
-            */
+            else if (mageButton.isSelected()) {
+                PlayerCharacter pc = new PlayerCharacter(nameTextField.getText(), "Mage");
+                parentFrame.openGame(pc);
+            }
+            else if (paladinButton.isSelected()) {
+                PlayerCharacter pc = new PlayerCharacter(nameTextField.getText(), "Paladin");
+                parentFrame.openGame(pc);
+            }
         }
         // Return to TitlePanel
         else if (e.getSource() == backButton) {

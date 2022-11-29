@@ -1,8 +1,9 @@
 package view.menu;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import view.game.*;
+import model.*;
+import cs321_team2.*;
 
 /**
  *
@@ -59,9 +60,15 @@ public class MenuFrame extends JFrame {
         
     }
     
-    // Sets Current Panel to CreditsPanel
-    public void openCredits() {
+    public void openGame(PlayerCharacter pc) {
+        Dungeon dungeon = new Dungeon(pc, 1);
         
+        this.getContentPane().removeAll();
+        this.getContentPane().invalidate();
+        
+        DungeonFrame dungeonFrame = new DungeonFrame(pc, dungeon);
+        dungeonFrame.setVisible(true);
+        this.dispose();
     }
     
     // Exits Program
