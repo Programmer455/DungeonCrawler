@@ -18,6 +18,7 @@ public class Battle_Scene extends JPanel implements ActionListener {
     
     private final Enemy enemy;
     private final PlayerCharacter pc;
+    private final Dungeon dungeon;
     
     private final JLabel playerMovesLabel = new JLabel();
     private final JLabel enemyMovesLabel = new JLabel();
@@ -42,10 +43,11 @@ public class Battle_Scene extends JPanel implements ActionListener {
     
     private int attackBoostCounter = 0;
     
-    public Battle_Scene(DungeonFrame parentFrame, PlayerCharacter pc, Enemy enemy){
+    public Battle_Scene(DungeonFrame parentFrame, PlayerCharacter pc, Enemy enemy, Dungeon dungeon){
         
         this.pc = pc;
         this.enemy = enemy;
+        this.dungeon = dungeon;
 
         this.parentFrame = parentFrame;
         this.setLayout(null);
@@ -86,7 +88,6 @@ public class Battle_Scene extends JPanel implements ActionListener {
         addElements();
         addAttackButtons();
         addActionEvents();
-        setLabels();
     }
     
     private void addElements(){
@@ -202,10 +203,6 @@ public class Battle_Scene extends JPanel implements ActionListener {
         attack4Button.addActionListener(this);
     }
     
-    private void setLabels() {
-        
-    }
-    
     @Override
     public void actionPerformed(ActionEvent e) {  
         if (e.getSource() == attack1Button) {
@@ -247,32 +244,49 @@ public class Battle_Scene extends JPanel implements ActionListener {
             
             switch (pc.getArchetype()) {
                 case "Warrior" -> {
-                    attackBoostCounter = 4;
+                    if (pc.getCurrentFP() < 4) {
+                        playerMovesLabel.setText("Not Enough FP. Your turn is wasted!");
+                    }
+                    else {
+                        attackBoostCounter = 4;
                     pc.setAtk(pc.getAtk() + 10);
                     pc.setCurrentFP(pc.getCurrentFP() - 4);
                     playerMovesLabel.setText(pc.getName() + " increased their Attack for three turns!");
+                    playerFPNumLabel.setText(String.valueOf(pc.getCurrentFP()));
+                    }
                 }
                 case "Mage" -> {
-                    int t = 0;
-                    for (int i = 0; i < 3; i++) {
-                        if (rand.nextInt(6) == 0) {
-                            enemy.setHP(enemy.getHP() - 12);
-                            t += 12;
-                        }
-                        else {
-                            enemy.setHP(enemy.getHP() - 6);
-                            t += 6;
-                        }
+                    if (pc.getCurrentFP() < 2) {
+                        playerMovesLabel.setText("Not Enough FP. Your turn is wasted!");
                     }
-                    playerMovesLabel.setText(pc.getName() + " attacked " + enemy.getName() + " with Magic Missile for " + t + " damage!");
-                    enemyHPNumLabel.setText(String.valueOf(enemy.getHP()));
+                    else {
+                        int t = 0;
+                        for (int i = 0; i < 3; i++) {
+                            if (rand.nextInt(6) == 0) {
+                                enemy.setHP(enemy.getHP() - 12);
+                                t += 12;
+                            }
+                            else {
+                                enemy.setHP(enemy.getHP() - 6);
+                                t += 6;
+                            }
+                        }
+                        playerMovesLabel.setText(pc.getName() + " attacked " + enemy.getName() + " with Magic Missile for " + t + " damage!");
+                        enemyHPNumLabel.setText(String.valueOf(enemy.getHP()));
+                    }
+                    
                 }
                 case "Paladin" -> {
-                    pc.setCurrentHP(pc.getCurrentHP() + (pc.getMaxHP() / 4));
-                    if (pc.getCurrentHP() > pc.getMaxHP()) {
-                        pc.setCurrentHP(pc.getMaxHP());
+                    if (pc.getCurrentFP() < 5) {
+                        playerMovesLabel.setText("Not Enough FP. Your turn is wasted!");
                     }
-                    playerMovesLabel.setText(pc.getName() + " healed themselves!");
+                    else {
+                        pc.setCurrentHP(pc.getCurrentHP() + (pc.getMaxHP() / 2));
+                        if (pc.getCurrentHP() > pc.getMaxHP()) {
+                            pc.setCurrentHP(pc.getMaxHP());
+                        }
+                        playerMovesLabel.setText(pc.getName() + " healed themselves!");
+                    }
                 }
             }
             
@@ -321,7 +335,9 @@ public class Battle_Scene extends JPanel implements ActionListener {
         }
         
         if (enemy.getHP() <= 0) {
-            // End Battle - Win
+            playerMovesLabel.setText(pc.getName() + " has defeated " + enemy.getName() + "!");
+            pc.addXP(enemy.getXP());
+            parentFrame.returnToDungeon(pc, dungeon);
         }
     }
     

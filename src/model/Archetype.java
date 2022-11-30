@@ -32,10 +32,16 @@ public class Archetype {
         return level;
     }
     
-    public void levelUp() {
+    public void addXP(int xp) {
+        XP += xp;
         if (XP >= 100) {
-            level++;
-            XP = XP - 100;
+            levelUp();
         }
+    }
+    
+    public void levelUp() {
+        level++;
+        XP = XP - 100;
+        
     }
 }

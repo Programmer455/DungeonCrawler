@@ -55,24 +55,36 @@ public class DungeonPanel extends JPanel {
                                         reloadDungeon();
                                     }
                                     case "goblin" -> {
-                                        parentFrame.openCombat(pc, new Enemy("Goblin"));
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY() - 1].setTileType("player");
+                                        pc.setPos(pc.getPosX(), pc.getPosY() - 1);
+                                        parentFrame.openCombat(pc, new Enemy("Goblin"), dungeon);
                                     }
                                     case "hobgoblin" -> {
-                                        parentFrame.openCombat(pc, new Enemy("Hobgoblin"));
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY() - 1].setTileType("player");
+                                        pc.setPos(pc.getPosX(), pc.getPosY() - 1);
+                                        parentFrame.openCombat(pc, new Enemy("Hobgoblin"), dungeon);
                                     }
                                     case "door" -> {
-                                        // Level Up
+                                        parentFrame.openNewFloor(pc, dungeon.getFloor() + 1);
                                     }
                                 }
                             }
                             case "goblin" -> {
-                                parentFrame.openCombat(pc, new Enemy("Goblin"));
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY() - 1].setTileType("player");
+                                pc.setPos(pc.getPosX(), pc.getPosY() - 1);
+                                parentFrame.openCombat(pc, new Enemy("Goblin"), dungeon);
                             }
                             case "hobgoblin" -> {
-                                parentFrame.openCombat(pc, new Enemy("Hobgoblin"));
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY() - 1].setTileType("player");
+                                pc.setPos(pc.getPosX(), pc.getPosY() - 1);
+                                parentFrame.openCombat(pc, new Enemy("Hobgoblin"), dungeon);
                             }
                             case "door" -> {
-                                // Level Up
+                                parentFrame.openNewFloor(pc, dungeon.getFloor() + 1);
                             }
                         }
                     }
@@ -90,24 +102,36 @@ public class DungeonPanel extends JPanel {
                                         reloadDungeon();
                                     }
                                     case "goblin" -> {
-                                        parentFrame.openCombat(pc, new Enemy("Goblin"));
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY() + 1].setTileType("player");
+                                        pc.setPos(pc.getPosX(), pc.getPosY() + 1);
+                                        parentFrame.openCombat(pc, new Enemy("Goblin"), dungeon);
                                     }
                                     case "hobgoblin" -> {
-                                        parentFrame.openCombat(pc, new Enemy("Hobgoblin"));
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY() + 1].setTileType("player");
+                                        pc.setPos(pc.getPosX(), pc.getPosY() + 1);
+                                        parentFrame.openCombat(pc, new Enemy("Hobgoblin"), dungeon);
                                     }
                                     case "door" -> {
-                                        // Level Up
+                                        parentFrame.openNewFloor(pc, dungeon.getFloor() + 1);
                                     }
                                 }
                             }
                             case "goblin" -> {
-                                parentFrame.openCombat(pc, new Enemy("Goblin"));
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY() + 1].setTileType("player");
+                                pc.setPos(pc.getPosX(), pc.getPosY() + 1);
+                                parentFrame.openCombat(pc, new Enemy("Goblin"), dungeon);
                             }
                             case "hobgoblin" -> {
-                                parentFrame.openCombat(pc, new Enemy("Hobgoblin"));
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY() + 1].setTileType("player");
+                                pc.setPos(pc.getPosX(), pc.getPosY() + 1);
+                                parentFrame.openCombat(pc, new Enemy("Hobgoblin"), dungeon);
                             }
                             case "door" -> {
-                                // Level Up
+                                parentFrame.openNewFloor(pc, dungeon.getFloor() + 1);
                             }
                         }
                     }
@@ -125,24 +149,36 @@ public class DungeonPanel extends JPanel {
                                         reloadDungeon();
                                     }
                                     case "goblin" -> {
-                                        parentFrame.openCombat(pc, new Enemy("Goblin"));
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                        dungeon.tilemap[pc.getPosX() - 1][pc.getPosY()].setTileType("player");
+                                        pc.setPos(pc.getPosX() - 1, pc.getPosY());
+                                        parentFrame.openCombat(pc, new Enemy("Goblin"), dungeon);
                                     }
                                     case "hobgoblin" -> {
-                                        parentFrame.openCombat(pc, new Enemy("Hobgoblin"));
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                        dungeon.tilemap[pc.getPosX() - 1][pc.getPosY()].setTileType("player");
+                                        pc.setPos(pc.getPosX() - 1, pc.getPosY());
+                                        parentFrame.openCombat(pc, new Enemy("Hobgoblin"), dungeon);
                                     }
                                     case "door" -> {
-                                        // Level Up
+                                        parentFrame.openNewFloor(pc, dungeon.getFloor() + 1);
                                     }
                                 }
                             }
                             case "goblin" -> {
-                                parentFrame.openCombat(pc, new Enemy("Goblin"));
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                dungeon.tilemap[pc.getPosX() - 1][pc.getPosY()].setTileType("player");
+                                pc.setPos(pc.getPosX() - 1, pc.getPosY());
+                                parentFrame.openCombat(pc, new Enemy("Goblin"), dungeon);
                             }
                             case "hobgoblin" -> {
-                                parentFrame.openCombat(pc, new Enemy("Hobgoblin"));
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                dungeon.tilemap[pc.getPosX() - 1][pc.getPosY()].setTileType("player");
+                                pc.setPos(pc.getPosX() - 1, pc.getPosY());
+                                parentFrame.openCombat(pc, new Enemy("Hobgoblin"), dungeon);
                             }
                             case "door" -> {
-                                // Level Up
+                                parentFrame.openNewFloor(pc, dungeon.getFloor() + 1);
                             }
                         }
                     }
@@ -160,24 +196,36 @@ public class DungeonPanel extends JPanel {
                                         reloadDungeon();
                                     }
                                     case "goblin" -> {
-                                        parentFrame.openCombat(pc, new Enemy("Goblin"));
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                        dungeon.tilemap[pc.getPosX() + 1][pc.getPosY()].setTileType("player");
+                                        pc.setPos(pc.getPosX() + 1, pc.getPosY());
+                                        parentFrame.openCombat(pc, new Enemy("Goblin"), dungeon);
                                     }
                                     case "hobgoblin" -> {
-                                        parentFrame.openCombat(pc, new Enemy("Hobgoblin"));
+                                        dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                        dungeon.tilemap[pc.getPosX() + 1][pc.getPosY()].setTileType("player");
+                                        pc.setPos(pc.getPosX() + 1, pc.getPosY());
+                                        parentFrame.openCombat(pc, new Enemy("Hobgoblin"), dungeon);
                                     }
                                     case "door" -> {
-                                        // Level Up
+                                        parentFrame.openNewFloor(pc, dungeon.getFloor() + 1);
                                     }
                                 }
                             }
                             case "goblin" -> {
-                                parentFrame.openCombat(pc, new Enemy("Goblin"));
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                dungeon.tilemap[pc.getPosX() + 1][pc.getPosY()].setTileType("player");
+                                pc.setPos(pc.getPosX() + 1, pc.getPosY());
+                                parentFrame.openCombat(pc, new Enemy("Goblin"), dungeon);
                             }
                             case "hobgoblin" -> {
-                                parentFrame.openCombat(pc, new Enemy("Hobgoblin"));
+                                dungeon.tilemap[pc.getPosX()][pc.getPosY()].setTileType("grass");
+                                dungeon.tilemap[pc.getPosX() + 1][pc.getPosY()].setTileType("player");
+                                pc.setPos(pc.getPosX() + 1, pc.getPosY());
+                                parentFrame.openCombat(pc, new Enemy("Hobgoblin"), dungeon);
                             }
                             case "door" -> {
-                                // Level Up
+                                parentFrame.openNewFloor(pc, dungeon.getFloor() + 1);
                             }
                         }
                     }
@@ -186,7 +234,7 @@ public class DungeonPanel extends JPanel {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                // Do Nothing
+                reloadDungeon();
             }
         });
     }
