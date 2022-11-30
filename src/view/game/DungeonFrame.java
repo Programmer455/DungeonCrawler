@@ -67,5 +67,19 @@ public class DungeonFrame extends JFrame {
         this.setTitle("Unnamed Dungeon Crawler");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+    public void openGameOver() {
+        this.getContentPane().removeAll();
+        this.getContentPane().invalidate();
+        
+        this.getContentPane().add(new gameOverPanel(this));
+        this.setSize(1200, 700);
+        this.setResizable(false);
+        this.setFocusable(true);
+        this.setTitle("Unnamed Dungeon Crawler");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    
     
 }
