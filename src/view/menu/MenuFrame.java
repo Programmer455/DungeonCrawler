@@ -59,7 +59,18 @@ public class MenuFrame extends JFrame {
     
     // Sets Current Panel to LeaderboardPanel
     public void openLeaderboard() {
+                
+        this.getContentPane().removeAll();
+        this.getContentPane().invalidate();
         
+        panel = new LeaderBoardPanel(this);
+        
+        this.getContentPane().add(panel);
+        this.getContentPane().revalidate();
+        this.setSize(1200, 700);
+        this.setResizable(false);
+        this.setTitle("Unnamed Dungeon Crawler");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     public void openGame(PlayerCharacter pc) {
