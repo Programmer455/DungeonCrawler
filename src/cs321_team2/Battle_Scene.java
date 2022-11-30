@@ -4,6 +4,8 @@ package cs321_team2;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Random;
 import view.menu.*;
 import view.game.*;
@@ -332,6 +334,16 @@ public class Battle_Scene extends JPanel implements ActionListener {
         
         if (pc.getCurrentHP() <= 0) {
             // End Game - Loss
+                          try
+                {
+                            PrintWriter out = new PrintWriter(System.getProperty("user.dir") + "\\src\\view\\menu\\LeaderBoard.txt"); // Step 2
+                            out.println(pc.getName() + ": " + pc.getScoreAsString());   // Step 3
+                            out.close();  // Step 4  
+                             }
+                catch (FileNotFoundException ex)  
+                {               
+                }
+                parentFrame.openGameOver();
         }
         
         if (enemy.getHP() <= 0) {
