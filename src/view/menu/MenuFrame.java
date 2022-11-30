@@ -1,5 +1,6 @@
 package view.menu;
 
+import cs321_team2.*;
 import javax.swing.*;
 import view.game.*;
 import model.*;
@@ -75,4 +76,19 @@ public class MenuFrame extends JFrame {
     public void exitGame() {
         this.dispose();
     }
+    
+    public void startBattle() {
+        this.getContentPane().removeAll();
+        this.getContentPane().invalidate();
+        
+        panel = new Battle_Scene(this);
+        this.getContentPane().add(panel);
+        this.getContentPane().revalidate();
+        
+        this.setSize(1200, 700);
+        this.setResizable(false);
+        this.setTitle("Unnamed Dungeon Crawler");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
 }
