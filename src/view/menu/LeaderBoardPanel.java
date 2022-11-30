@@ -2,6 +2,9 @@ package view.menu;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
 
 
 /**
@@ -44,9 +47,21 @@ public class LeaderBoardPanel extends JPanel implements ActionListener {
         
     }
     
-        public void setList(String name, String score){
-            
-        }
+        public void setList(){                               
+            Scanner console = new Scanner(System.in);
+            try
+            {
+            FileReader fr = new FileReader(System.getProperty("user.dir") + "\\src\\view\\menu\\LeaderBoard.txt"); 
+            Scanner inFile = new Scanner(fr); 
+            String line;
+            line = inFile.nextLine();
+            listModel.addElement(line);
+            }
+            catch (FileNotFoundException ex)   {
+                  }
+
+            }
+        
     
         private void addElements() {
         
