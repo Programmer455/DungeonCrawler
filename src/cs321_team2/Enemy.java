@@ -10,25 +10,28 @@ public class Enemy {
     //private Archetype archetype;
     private int maxHP;
     private int currentHP;
-    private int maxFP;
-    private int currentFP;
     private int Atk;
     private int Xp;
-    private int[] loc = {0,0,0};    
+    private int locX;
+    private int locY;
+    private int type;
     
-    public Enemy() {
+    public Enemy(int kind) {
+        if(kind == 1){
         name = "Goblin";
-        maxHP = 10;
+        maxHP = 55;
         currentHP = maxHP;
-        maxFP = 10;
-        currentFP = maxFP;
         Atk = 10;
-        Xp = 10;   
-    }
+        Xp = 20;
+    }else{
+        name = "HobGoblin";
+        maxHP = 150;
+        currentHP = maxHP;
+        Atk = 18;
+        Xp = 50;
+        }
+  }
     
-    public int[] getLoc() {
-    return loc;
-}
     
     public int getXp (){
         return Xp;
@@ -41,11 +44,7 @@ public class Enemy {
     public int getHP() {
         return currentHP;
     }
-    
-    public int getFP() {
-        return currentFP;
-    }
-    
+
     public int getAtk() {
         return Atk;
     }
@@ -56,9 +55,5 @@ public class Enemy {
     
     public void setAtk(int newAtk) {
         Atk = newAtk;
-    }
-    
-    public void setFP(int newFP) {
-        maxFP = newFP;
     }
 }

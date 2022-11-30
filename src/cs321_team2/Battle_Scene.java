@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import view.menu.*;
+import view.game.*;
 
 /**
  *
@@ -12,21 +13,37 @@ import view.menu.*;
  */
 public class Battle_Scene extends JPanel implements ActionListener {
     
-    private final MenuFrame parentFrame;
+    private final DungeonFrame parentFrame;
     
     
     private final JButton fight = new JButton("Fight");
     private final JButton run = new JButton("Retreat");
     private final JButton pReturn = new JButton("Back");
     private final JPanel atw = new JPanel();
-    private final JButton att1 = new JButton("att1");
-    private final JButton att2 = new JButton("att2");
-    private final JButton att3 = new JButton("att3");
+    private final JButton att1 = new JButton("Attack");
+    private final JButton att2 = new JButton("Heal");
+    private JLabel gobname = new JLabel("");
+    private JLabel plname = new JLabel("");
+    private JLabel gobhp= new JLabel("");
+    private JLabel plhp = new JLabel("");
+    private PlayerCharacter plch;
+    private Enemy gob;
     
-    public Battle_Scene(MenuFrame parentFrame){
+    public Battle_Scene(DungeonFrame parentFrame, PlayerCharacter pc, Enemy enemy){
         
+        PlayerCharacter plch = pc;
+        Enemy gob = enemy;
+
         this.parentFrame = parentFrame;
         this.setLayout(null);
+        
+        if(enemy.getAtk() == 10){
+            gobname.setName("Goblin");
+           // gobhp.setName(enemy.getHP());
+        }else{
+            gobname.setName("HobGoblin");
+           // gobhp.setName(enemy.getHP());
+        }
         
         att1.setFont(new Font("Verdana", Font.BOLD, 20));
         att1.setBackground(Color.RED);
@@ -35,10 +52,6 @@ public class Battle_Scene extends JPanel implements ActionListener {
         att2.setFont(new Font("Verdana", Font.BOLD, 20));
         att2.setBackground(Color.RED);
         att2.setForeground(Color.WHITE);
-        
-        att3.setFont(new Font("Verdana", Font.BOLD, 20));
-        att3.setBackground(Color.RED);
-        att3.setForeground(Color.WHITE);
         
         fight.setFont(new Font("Verdana", Font.BOLD, 20));
         fight.setBackground(Color.RED);
@@ -61,8 +74,7 @@ public class Battle_Scene extends JPanel implements ActionListener {
         GridBagConstraints gbc;
         atw.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
-        
-        
+
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridx = 2;
         gbc.gridy = 2;
@@ -78,17 +90,12 @@ public class Battle_Scene extends JPanel implements ActionListener {
         gbc.gridy = 0;
         atw.add(att2, gbc);
         
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        atw.add(att3, gbc);
-        
         this.add(fight);
         this.add(run);
         this.add(atw);
         atw.add(pReturn);
         atw.setVisible(false);
-        
-        
+
         atw.setBounds(400,550,425,100);
         fight.setBounds(920,550,150,50);
         run.setBounds(920,600,150,50);
@@ -104,17 +111,25 @@ public class Battle_Scene extends JPanel implements ActionListener {
         fight.addActionListener(this);
         run.addActionListener(this);
         pReturn.addActionListener(this);
+        att1.addActionListener(this); 
+        att2.addActionListener(this);
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {  
         if(e.getSource().equals(fight)){
             atw.setVisible(true);
-            
         }
         if(e.getSource().equals(pReturn)){
             atw.setVisible(false);
         }
+        if(e.getSource().equals(att1)){
+           // = gob.getHP();
+          // hp = hp - plch.getAtk();
+        }
+          if(e.getSource().equals(att2)){
+           //int ph = 
     }
     
+}
 }
