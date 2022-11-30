@@ -99,7 +99,7 @@ public class TitlePanel extends JPanel implements ActionListener {
         }
         // Moves to LeaderboardPanel
         else if (e.getSource() == leaderboardButton) {
-            
+
         }
         // Exits Program
         else if (e.getSource() == exitButton) {
