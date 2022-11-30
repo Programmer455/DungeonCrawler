@@ -1,10 +1,12 @@
 package view.game;
 
+import cs321_team2.PlayerCharacter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import model.*;
 import cs321_team2.Dungeon;
+import cs321_team2.Enemy;
 
 /**
  *
@@ -45,6 +47,7 @@ public class DungeonPanel extends JPanel {
                     }
                     else if (dungeon.tilemap[pc.getPosX()][pc.getPosY() - 1].hasEnemy() == true) {
                         System.out.println("ENEMY");
+                        parentFrame.openCombat(pc, new Enemy(1));
                     }
                     else if (dungeon.tilemap[pc.getPosX()][pc.getPosY() - 1].hasEnemy() == true) {
                         // Open Chest
