@@ -37,13 +37,6 @@ public class Battle_Scene extends JPanel implements ActionListener {
         this.parentFrame = parentFrame;
         this.setLayout(null);
         
-        if(enemy.getAtk() == 10){
-            gobname.setName("Goblin");
-           // gobhp.setName(enemy.getHP());
-        }else{
-            gobname.setName("HobGoblin");
-           // gobhp.setName(enemy.getHP());
-        }
         
         att1.setFont(new Font("Verdana", Font.BOLD, 20));
         att1.setBackground(Color.RED);
@@ -65,16 +58,37 @@ public class Battle_Scene extends JPanel implements ActionListener {
         run.setBackground(Color.RED);
         run.setForeground(Color.WHITE);
         
-        addElements();
+        addElements(plch, gob);
         addActionEvents();
     }
     
-    private void addElements(){
-        
+    private void addElements(PlayerCharacter plch, Enemy gob){
+       
         GridBagConstraints gbc;
         atw.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
+        
+         
+        plname.setText(plch.getName());
+        plhp.setText(String.valueOf("HP: " + plch.getHP()));
+        
 
+          if(gob.getAtk() == 10){
+            gobname.setText("Goblin");
+            gobhp.setText(String.valueOf( gob.getHP()));
+            
+        }else{
+            gobname.setText("HobGoblin");
+            gobhp.setText(String.valueOf("HP: " + gob.getHP()));
+        }
+          
+          this.add(gobhp);
+          this.add(gobname);
+          this.add(plhp);
+          this.add(plname);
+
+ 
+        
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridx = 2;
         gbc.gridy = 2;
@@ -105,6 +119,19 @@ public class Battle_Scene extends JPanel implements ActionListener {
         this.add(back);
         back.setBounds(0,0,1200,700);
         back.setFocusable(false);  
+        
+          back.add(gobhp);
+          back.add(gobname);
+          back.add(plhp);
+          back.add(plname);
+          plname.setFont(new Font("Verdana", Font.BOLD, 30));
+          plname.setBounds(150, 600, 150 ,40);
+          gobhp.setFont(new Font("Verdana", Font.BOLD, 30));
+          gobhp.setBounds(950, 80, 150 ,40);
+          gobname.setFont(new Font("Verdana", Font.BOLD, 30));
+          gobname.setBounds(950, 120, 150 ,40);
+          plhp.setFont(new Font("Verdana", Font.BOLD, 30));
+          plhp.setBounds(150, 560, 150 , 40);
     }
     
     private void addActionEvents(){
@@ -124,8 +151,9 @@ public class Battle_Scene extends JPanel implements ActionListener {
             atw.setVisible(false);
         }
         if(e.getSource().equals(att1)){
-           // = gob.getHP();
-          // hp = hp - plch.getAtk();
+            int hp = Integer.parseInt(gobhp.getText());
+           hp = hp - 10;
+           gobhp.setText(String.valueOf(hp));
         }
           if(e.getSource().equals(att2)){
            //int ph = 
