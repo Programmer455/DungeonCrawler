@@ -28,6 +28,10 @@ public class Archetype {
         return name;
     }
     
+    public int getLevel() {
+        return level;
+    }
+    
     public void levelUp() {
         if (XP >= 100) {
             level++;

@@ -8,6 +8,7 @@ import java.io.*;
 import java.util.*;
 import model.*;
 import cs321_team2.*;
+import static java.lang.Math.abs;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,11 +19,18 @@ import java.util.logging.Logger;
 public class Dungeon {
     
     private int floor;
-    public Tile tilemap[][] = new Tile[32][32];
-    private Enemy enemies[] = new Enemy[16];
+    public Tile tilemap[][] = new Tile[24][16];
     
+    // Constructor
     public Dungeon(PlayerCharacter pc, int floor) {
         this.floor = floor;
+        
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 24; j++) {
+                tilemap[j][i] = new Tile();
+            }
+        }
+        
         try {
             setDungeon(pc);
         } catch (FileNotFoundException ex) {
@@ -30,61 +38,231 @@ public class Dungeon {
         }
     }
     
+    // Reads Level File to Create Dungeon
     private void setDungeon(PlayerCharacter pc) throws FileNotFoundException {
         
         File fl = new File(System.getProperty("user.dir") + "\\src\\cs321_team2\\Levels\\Level" + String.valueOf(floor) + ".txt");
         Scanner sc = new Scanner(fl);
         
-        for (int i = 0; i < 32; i++) {
-            for (int j = 0; j < 32; j++) {
-                if (sc.hasNext()) {
-                    String type = sc.next();
-                    if (type.equals("endl")) {
-                        j = 32;
+        // Loops through Dungeon Grid
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 24; j++) {
+                switch (sc.next()) {
+                    case "0" -> {
+                        tilemap[j][i].setTileType("null");
                     }
-                    else if (type.equals("start")) {
-                        tilemap[j][i] = new Tile();
-                        tilemap[j][i].setTileType(type);
-                        tilemap[j][i].setPlayer(true);
+                    case "1" -> {
+                        tilemap[j][i].setTileType("wall");
+                    }
+                    case "2" -> {
+                        tilemap[j][i].setTileType("grass");
+                    }
+                    case "3" -> {
+                        tilemap[j][i].setTileType("door");
+                    }
+                    case "4" -> {
+                        tilemap[j][i].setTileType("player");
                         pc.setPos(j, i);
                     }
-                    else if (type.equals("chest")) {
-                        tilemap[j][i] = new Tile();
-                        tilemap[j][i].setTileType(type);
-                        tilemap[j][i].setChest(true);
+                    case "5" -> {
+                        tilemap[j][i].setTileType("goblin");
                     }
-                    else if (type.equals("door")) {
-                        tilemap[j][i] = new Tile();
-                        tilemap[j][i].setTileType(type);
-                        tilemap[j][i].setDoor(true);
-                    }
-                    else if (type.equals("goblin")) {
-                        tilemap[j][i] = new Tile();
-                        tilemap[j][i].setTileType(type);
-                        tilemap[j][i].setEnemyType("goblin");
-                    }
-                    else if (type.equals("hobgoblin")) {
-                        tilemap[j][i] = new Tile();
-                        tilemap[j][i].setTileType(type);
-                        tilemap[j][i].setEnemyType("hobgoblin");
-                    }
-                    else {
-                        tilemap[j][i] = new Tile();
-                        tilemap[j][i].setTileType(type);
+                    case "6" -> {
+                        tilemap[j][i].setTileType("hobgoblin");
                     }
                 }
-                else {
-                    j = 32;
-                    i = 32;
-                }
-                
-                
             }
         }
     }
     
-    public void moveEnemies() {
-        
+    // Moves Enemies closer to Player
+    public void moveEnemies(PlayerCharacter pc) {
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 24; j++) {
+                if (tilemap[j][i].getTileType() == "goblin" && tilemap[j][i].getMoved() == false) {
+                    moveEnemy(pc, "goblin", j, i);
+                }
+                else if (tilemap[j][i].getTileType() == "hobgoblin" && tilemap[j][i].getMoved() == false) {
+                    moveEnemy(pc, "hobgoblin", j, i);
+                }
+            }
+        }
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 24; j++) {
+                tilemap[j][i].setMoved(false);
+            }
+        }
+    }
+    
+    private void moveEnemy(PlayerCharacter pc, String type, int x, int y) {
+        if (abs(pc.getPosX() - x) >= abs(pc.getPosY() - y)) {
+            if (pc.getPosX() - x >= 0) {
+                if (tilemap[x + 1][y].getTileType() == "grass") {
+                    tilemap[x + 1][y].setTileType(type);
+                    tilemap[x + 1][y].setMoved(true);
+                    tilemap[x][y].setTileType("grass");
+                }
+                else if (pc.getPosY() - y >= 0) {
+                    if (tilemap[x][y + 1].getTileType() == "grass") {
+                        tilemap[x][y + 1].setTileType(type);
+                        tilemap[x][y + 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x][y - 1].getTileType() == "grass") {
+                        tilemap[x][y - 1].setTileType(type);
+                        tilemap[x][y - 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x - 1][y].getTileType() == "grass") {
+                        tilemap[x - 1][y].setTileType(type);
+                        tilemap[x - 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                }
+                else {
+                    if (tilemap[x][y - 1].getTileType() == "grass") {
+                        tilemap[x][y - 1].setTileType(type);
+                        tilemap[x][y - 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x][y + 1].getTileType() == "grass") {
+                        tilemap[x][y + 1].setTileType(type);
+                        tilemap[x][y + 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x - 1][y].getTileType() == "grass") {
+                        tilemap[x - 1][y].setTileType(type);
+                        tilemap[x - 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                }
+            }
+            else {
+                if (tilemap[x - 1][y].getTileType() == "grass") {
+                    tilemap[x - 1][y].setTileType(type);
+                    tilemap[x - 1][y].setMoved(true);
+                    tilemap[x][y].setTileType("grass");
+                }
+                else if (pc.getPosY() - y >= 0) {
+                    if (tilemap[x][y + 1].getTileType() == "grass") {
+                        tilemap[x][y + 1].setTileType(type);
+                        tilemap[x][y + 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x][y - 1].getTileType() == "grass") {
+                        tilemap[x][y - 1].setTileType(type);
+                        tilemap[x][y - 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x + 1][y].getTileType() == "grass") {
+                        tilemap[x + 1][y].setTileType(type);
+                        tilemap[x + 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                }
+                else {
+                    if (tilemap[x][y - 1].getTileType() == "grass") {
+                        tilemap[x][y - 1].setTileType(type);
+                        tilemap[x][y - 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x][y + 1].getTileType() == "grass") {
+                        tilemap[x][y + 1].setTileType(type);
+                        tilemap[x][y + 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x + 1][y].getTileType() == "grass") {
+                        tilemap[x + 1][y].setTileType(type);
+                        tilemap[x + 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                }
+            }
+        }
+        else {
+            if (pc.getPosY() - y >= 0) {
+                if (tilemap[x][y + 1].getTileType() == "grass") {
+                    tilemap[x][y + 1].setTileType(type);
+                    tilemap[x][y + 1].setMoved(true);
+                    tilemap[x][y].setTileType("grass");
+                }
+                else if (pc.getPosX() - x >= 0) {
+                    if (tilemap[x + 1][y].getTileType() == "grass") {
+                        tilemap[x + 1][y].setTileType(type);
+                        tilemap[x + 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x - 1][y].getTileType() == "grass") {
+                        tilemap[x - 1][y].setTileType(type);
+                        tilemap[x - 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x][y - 1].getTileType() == "grass") {
+                        tilemap[x][y - 1].setTileType(type);
+                        tilemap[x][y - 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                }
+                else {
+                    if (tilemap[x - 1][y].getTileType() == "grass") {
+                        tilemap[x - 1][y].setTileType(type);
+                        tilemap[x - 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x + 1][y].getTileType() == "grass") {
+                        tilemap[x + 1][y].setTileType(type);
+                        tilemap[x + 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x][y - 1].getTileType() == "grass") {
+                        tilemap[x][y - 1].setTileType(type);
+                        tilemap[x][y - 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                }
+            }
+            else {
+                if (tilemap[x][y - 1].getTileType() == "grass") {
+                    tilemap[x][y - 1].setTileType(type);
+                    tilemap[x][y - 1].setMoved(true);
+                    tilemap[x][y].setTileType("grass");
+                }
+                else if (pc.getPosX() - x >= 0) {
+                    if (tilemap[x + 1][y].getTileType() == "grass") {
+                        tilemap[x + 1][y].setTileType(type);
+                        tilemap[x + 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x - 1][y].getTileType() == "grass") {
+                        tilemap[x - 1][y].setTileType(type);
+                        tilemap[x - 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x][y + 1].getTileType() == "grass") {
+                        tilemap[x][y + 1].setTileType(type);
+                        tilemap[x][y + 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                }
+                else {
+                    if (tilemap[x - 1][y].getTileType() == "grass") {
+                        tilemap[x - 1][y].setTileType(type);
+                        tilemap[x - 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x + 1][y].getTileType() == "grass") {
+                        tilemap[x + 1][y].setTileType(type);
+                        tilemap[x + 1][y].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                    else if (tilemap[x][y + 1].getTileType() == "grass") {
+                        tilemap[x][y + 1].setTileType(type);
+                        tilemap[x][y + 1].setMoved(true);
+                        tilemap[x][y].setTileType("grass");
+                    }
+                }
+            }
+        }
     }
     
     /**

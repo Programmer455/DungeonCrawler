@@ -14,15 +14,6 @@ public class Main {
        MenuFrame frame = new MenuFrame();
        frame.setVisible(true);
        
-       
-       /**
-       Dungeon test = new Dungeon(3, 3, 1);
-       test.setEmptyDungeon();
-       test.setLevel();
-       test.readLevel();
-       new Dungeon_UI(test);
-       */
-       
     }
     
 }

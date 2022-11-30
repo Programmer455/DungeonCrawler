@@ -10,31 +10,34 @@ package cs321_team2;
  */
 public class Tile {
  
-    private String tileType;//What type of tile it is(Ex. character, chest, etc.)
-    private boolean hasPlayer;
-    private boolean hasChest;
-    private String enemyType;
-    private boolean hasDoor;
+    private String tileType;
+    private boolean hasMoved = false;
     
-    public Tile()
-    {
+    public Tile() {
         tileType = "null";
-        hasPlayer = false;
-        hasChest = false;
-        enemyType = "null";
-        hasDoor = false;
     }
     
-    public void setTileType(String name)
-    {
+    public Tile(String name) {
         tileType = name;
     }
     
-    public String getTileType()
-    {
+    public void setTileType(String name) {
+        tileType = name;
+    }
+    
+    public String getTileType() {
         return tileType;
     }
     
+    public void setMoved(boolean bool) {
+        hasMoved = bool;
+    }
+    
+    public boolean getMoved() {
+        return hasMoved;
+    } 
+    
+    /**
     public void setPlayer(boolean bool)
     {
         hasPlayer = bool;
@@ -77,5 +80,5 @@ public class Tile {
     {
         return hasDoor;
     }
-    
+    */
 }

@@ -32,18 +32,24 @@ public class PlayerCharacter {
         Atk = 10;
     }
     
-    
-    
     public String getName() {
         return name;
     }
     
-    public int getHP() {
+    public int getCurrentHP() {
         return currentHP;
     }
     
-    public int getFP() {
+    public int getMaxHP() {
+        return maxHP;
+    }
+    
+    public int getCurrentFP() {
         return currentFP;
+    }
+    
+    public int getMaxFP() {
+        return maxFP;
     }
     
     public int getAtk() {
@@ -78,7 +84,15 @@ public class PlayerCharacter {
         return archetype.getArchetype();
     }
     
-    public void setHP(int newHP) {
+    public int getLevel() {
+        return archetype.getLevel();
+    }
+    
+    public void setCurrentHP(int newHP) {
+        currentHP = newHP;
+    }
+    
+    public void setMaxHP(int newHP) {
         maxHP = newHP;
     }
     
@@ -86,7 +100,11 @@ public class PlayerCharacter {
         Atk = newAtk;
     }
     
-    public void setFP(int newFP) {
+    public void setCurrentFP(int newFP) {
+        currentFP = newFP;
+    }
+    
+    public void setMaxFP(int newFP) {
         maxFP = newFP;
     }
     

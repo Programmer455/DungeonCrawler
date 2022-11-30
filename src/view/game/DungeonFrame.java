@@ -36,16 +36,6 @@ public class DungeonFrame extends JFrame {
         this.setResizable(false);
         this.setTitle("Unnamed Dungeon Crawler");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /**
-        Battle_Scene cb = new Battle_Scene(this, pc, enemy);
-        this.getContentPane().add(cb);
-        
-        this.setSize(1200, 700);
-        this.setResizable(false);
-        cb.setVisible(true);
-        this.setTitle("Unnamed Dungeon Crawler");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setContentPane(cb); */
         
     }
     

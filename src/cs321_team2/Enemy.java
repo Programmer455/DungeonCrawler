@@ -3,38 +3,40 @@ package cs321_team2;
 
 /**
  *
- * @author hoods
+ * @author Michael Hood
  */
 public class Enemy {
     private final String name;
-    //private Archetype archetype;
-    private int maxHP;
-    private int currentHP;
+    private int HP;
     private int Atk;
-    private int Xp;
-    private int locX;
-    private int locY;
-    private int type;
+    private int XP;
     
-    public Enemy(int kind) {
-        if(kind == 1){
-        name = "Goblin";
-        maxHP = 55;
-        currentHP = maxHP;
-        Atk = 10;
-        Xp = 20;
-    }else{
-        name = "HobGoblin";
-        maxHP = 150;
-        currentHP = maxHP;
-        Atk = 18;
-        Xp = 50;
+    public Enemy(String name) {
+        switch (name) {
+            case "Goblin" -> {
+                this.name = name;
+                HP = 20;
+                Atk = 3;
+                XP = 50;
+            }
+            case "Hobgoblin" -> {
+                this.name = name;
+                HP = 40;
+                Atk = 6;
+                XP = 100;
+            }
+            default -> {
+                this.name = "null";
+                HP = 1;
+                Atk = 1;
+                XP = 0;
+            }
         }
-  }
+    }
     
     
-    public int getXp (){
-        return Xp;
+    public int getXP (){
+        return XP;
     }
     
     public String getName() {
@@ -42,7 +44,7 @@ public class Enemy {
     }
     
     public int getHP() {
-        return currentHP;
+        return HP;
     }
 
     public int getAtk() {
@@ -50,7 +52,7 @@ public class Enemy {
     }
     
     public void setHP(int newHP) {
-        maxHP = newHP;
+        HP = newHP;
     }
     
     public void setAtk(int newAtk) {

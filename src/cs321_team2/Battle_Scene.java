@@ -4,160 +4,275 @@ package cs321_team2;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 import view.menu.*;
 import view.game.*;
 
 /**
  *
- * @author hoods
+ * @author Michael Hood
  */
 public class Battle_Scene extends JPanel implements ActionListener {
     
     private final DungeonFrame parentFrame;
     
+    private final Enemy enemy;
+    private final PlayerCharacter pc;
     
-    private final JButton fight = new JButton("Fight");
-    private final JButton run = new JButton("Retreat");
-    private final JButton pReturn = new JButton("Back");
-    private final JPanel atw = new JPanel();
-    private final JButton att1 = new JButton("Attack");
-    private final JButton att2 = new JButton("Heal");
-    private JLabel gobname = new JLabel("");
-    private JLabel plname = new JLabel("");
-    private JLabel gobhp= new JLabel("");
-    private JLabel plhp = new JLabel("");
-    private PlayerCharacter plch;
-    private Enemy gob;
+    private final JLabel playerMovesLabel = new JLabel();
+    private final JLabel enemyMovesLabel = new JLabel();
+    private final JLabel enemyHPLabel = new JLabel("HP:");
+    private final JLabel enemyHPNumLabel = new JLabel();
+    private final JLabel enemyIconLabel = new JLabel();
+    private final JLabel enemyNameLabel = new JLabel();
+    private final JLabel backgroundLabel = new JLabel(new ImageIcon(System.getProperty("user.dir") + "\\src\\cs321_team2\\background\\background.png"));
+    private final JLabel playerNameLabel = new JLabel();
+    private final JLabel playerIconLabel = new JLabel();
+    private final JLabel playerHPLabel = new JLabel("HP:");
+    private final JLabel playerHPNumLabel = new JLabel();
+    private final JLabel playerFPLabel = new JLabel("FP:");
+    private final JLabel playerFPNumLabel = new JLabel();
+    private final JButton attack1Button = new JButton();
+    private final JButton attack2Button = new JButton();
+    private final JButton attack3Button = new JButton();
+    private final JButton attack4Button = new JButton();
+    
+    private final Random rand = new Random();
     
     public Battle_Scene(DungeonFrame parentFrame, PlayerCharacter pc, Enemy enemy){
         
-        PlayerCharacter plch = pc;
-        Enemy gob = enemy;
+        this.pc = pc;
+        this.enemy = enemy;
 
         this.parentFrame = parentFrame;
         this.setLayout(null);
         
+        playerMovesLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+        enemyMovesLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+        enemyHPLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+        enemyHPNumLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+        enemyNameLabel.setFont(new Font("Verdana", Font.BOLD, 30));
+        playerNameLabel.setFont(new Font("Verdana", Font.BOLD, 30));
+        playerHPLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+        playerHPNumLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+        playerFPLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+        playerFPNumLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+        attack1Button.setFont(new Font("Verdana", Font.BOLD, 20));
+        attack2Button.setFont(new Font("Verdana", Font.BOLD, 20));
+        attack3Button.setFont(new Font("Verdana", Font.BOLD, 20));
+        attack4Button.setFont(new Font("Verdana", Font.BOLD, 20));
         
-        att1.setFont(new Font("Verdana", Font.BOLD, 20));
-        att1.setBackground(Color.RED);
-        att1.setForeground(Color.WHITE);
+        attack1Button.setBackground(Color.RED);
+        attack1Button.setForeground(Color.WHITE);
+        attack2Button.setBackground(Color.RED);
+        attack2Button.setForeground(Color.WHITE);
+        attack3Button.setBackground(Color.RED);
+        attack3Button.setForeground(Color.WHITE);
+        attack4Button.setBackground(Color.RED);
+        attack4Button.setForeground(Color.WHITE);
         
-        att2.setFont(new Font("Verdana", Font.BOLD, 20));
-        att2.setBackground(Color.RED);
-        att2.setForeground(Color.WHITE);
+        enemyNameLabel.setText(enemy.getName());
+        playerNameLabel.setText(pc.getName());
+        enemyIconLabel.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\cs321_team2\\Enemies\\" + enemy.getName() + ".png"));
+        playerIconLabel.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\cs321_team2\\Characters\\" + pc.getArchetype() + ".png"));
+        enemyHPNumLabel.setText(String.valueOf(enemy.getHP()));
+        playerHPNumLabel.setText(String.valueOf(pc.getHP()));
+        playerFPNumLabel.setText(String.valueOf(pc.getFP()));
         
-        fight.setFont(new Font("Verdana", Font.BOLD, 20));
-        fight.setBackground(Color.RED);
-        fight.setForeground(Color.WHITE);
-        
-        pReturn.setFont(new Font("Verdana", Font.BOLD, 20));
-        pReturn.setBackground(Color.RED);
-        pReturn.setForeground(Color.WHITE);
-        
-        run.setFont(new Font("Verdana", Font.BOLD, 20));
-        run.setBackground(Color.RED);
-        run.setForeground(Color.WHITE);
-        
-        addElements(plch, gob);
+        addElements();
+        addAttackButtons();
         addActionEvents();
+        setLabels();
     }
     
-    private void addElements(PlayerCharacter plch, Enemy gob){
+    private void addElements(){
        
-        GridBagConstraints gbc;
-        atw.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
         
-         
-        plname.setText(plch.getName());
-        plhp.setText(String.valueOf("HP: " + plch.getHP()));
+        playerMovesLabel.setBounds(20, 10, 600, 60);
+        playerMovesLabel.setText("Test");
+        this.add(playerMovesLabel);
         
-
-          if(gob.getAtk() == 10){
-            gobname.setText("Goblin");
-            gobhp.setText(String.valueOf( gob.getHP()));
-            
-        }else{
-            gobname.setText("HobGoblin");
-            gobhp.setText(String.valueOf("HP: " + gob.getHP()));
+        enemyMovesLabel.setBounds(20, 70, 600, 60);
+        enemyMovesLabel.setText("Test Label");
+        this.add(enemyMovesLabel);
+        
+        enemyHPLabel.setBounds(640, 10, 80, 60);
+        this.add(enemyHPLabel);
+        
+        enemyHPNumLabel.setBounds(640, 70, 80, 60);
+        this.add(enemyHPNumLabel);
+        
+        enemyIconLabel.setBounds(740, 10, 120, 120);
+        this.add(enemyIconLabel);
+        
+        enemyNameLabel.setBounds(880, 10, 120, 120);
+        this.add(enemyNameLabel);
+        
+        backgroundLabel.setBounds(10, 140, 1170, 380);
+        this.add(backgroundLabel);
+        
+        playerNameLabel.setBounds(20, 540, 120, 120);
+        this.add(playerNameLabel);
+        
+        playerIconLabel.setBounds(160, 540, 120, 120);
+        this.add(playerIconLabel);
+        
+        playerHPLabel.setBounds(300, 540, 80, 60);
+        this.add(playerHPLabel);
+        
+        playerHPNumLabel.setBounds(300, 600, 80, 60);
+        this.add(playerHPNumLabel);
+        
+        playerFPLabel.setBounds(390, 540, 80, 60);
+        this.add(playerFPLabel);
+        
+        playerFPNumLabel.setBounds(390, 600, 80, 60);
+        this.add(playerFPNumLabel);
+    }
+    
+    private void addAttackButtons() {
+        switch (pc.getArchetype()) {
+            case "Warrior" -> {
+                attack1Button.setText("Axe Slash");
+                attack2Button.setText("Attack Boost");
+                attack3Button.setText("Flurry Axtack");
+                attack4Button.setText("Axecution");
+            }
+            case "Mage" -> {
+                attack1Button.setText("Staff Whack");
+                attack2Button.setText("Magic Missile");
+                attack3Button.setText("Leech Life");
+                attack4Button.setText("Fireball");
+            }
+            case "Paladin" -> {
+                attack1Button.setText("Holy Smite");
+                attack2Button.setText("Holy Healing");
+                attack3Button.setText("Holy Light");
+                attack4Button.setText("Holy Discombobulation");
+            }
         }
-          
-          this.add(gobhp);
-          this.add(gobname);
-          this.add(plhp);
-          this.add(plname);
-
- 
         
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.gridx = 2;
-        gbc.gridy = 2;
-        gbc.gridy = 3;
-        gbc.ipadx = 3;
-        atw.add(pReturn, gbc);
+        switch (pc.getLevel()) {
+            case 1 -> {
+                attack1Button.setVisible(true);
+                attack2Button.setVisible(true);
+                attack3Button.setVisible(false);
+                attack4Button.setVisible(false);
+            }
+            case 2 -> {
+                attack1Button.setVisible(true);
+                attack2Button.setVisible(true);
+                attack3Button.setVisible(true);
+                attack4Button.setVisible(false);
+            }
+            case 3 -> {
+                attack1Button.setVisible(true);
+                attack2Button.setVisible(true);
+                attack3Button.setVisible(true);
+                attack4Button.setVisible(true);
+            }
+        }
         
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        atw.add(att1, gbc);
+        attack1Button.setBounds(480, 540, 240, 50);
+        this.add(attack1Button);
         
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        atw.add(att2, gbc);
+        attack2Button.setBounds(730, 540, 240, 50);
+        this.add(attack2Button);
         
-        this.add(fight);
-        this.add(run);
-        this.add(atw);
-        atw.add(pReturn);
-        atw.setVisible(false);
-
-        atw.setBounds(400,550,425,100);
-        fight.setBounds(920,550,150,50);
-        run.setBounds(920,600,150,50);
+        attack3Button.setBounds(480, 600, 240, 50);
+        this.add(attack3Button);
         
-        ImageIcon bg = new ImageIcon(System.getProperty("user.dir") + "\\src\\cs321_team2\\background\\background.png");
-        JLabel back = new JLabel(bg);
-        this.add(back);
-        back.setBounds(0,0,1200,700);
-        back.setFocusable(false);  
-        
-          back.add(gobhp);
-          back.add(gobname);
-          back.add(plhp);
-          back.add(plname);
-          plname.setFont(new Font("Verdana", Font.BOLD, 30));
-          plname.setBounds(150, 600, 150 ,40);
-          gobhp.setFont(new Font("Verdana", Font.BOLD, 30));
-          gobhp.setBounds(950, 80, 150 ,40);
-          gobname.setFont(new Font("Verdana", Font.BOLD, 30));
-          gobname.setBounds(950, 120, 150 ,40);
-          plhp.setFont(new Font("Verdana", Font.BOLD, 30));
-          plhp.setBounds(150, 560, 150 , 40);
+        attack4Button.setBounds(730, 600, 240, 50);
+        this.add(attack4Button);
     }
     
     private void addActionEvents(){
-        fight.addActionListener(this);
-        run.addActionListener(this);
-        pReturn.addActionListener(this);
-        att1.addActionListener(this); 
-        att2.addActionListener(this);
+        attack1Button.addActionListener(this);
+        attack2Button.addActionListener(this);
+        attack3Button.addActionListener(this);
+        attack4Button.addActionListener(this);
+    }
+    
+    private void setLabels() {
+        
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {  
-        if(e.getSource().equals(fight)){
-            atw.setVisible(true);
+        if (e.getSource() == attack1Button) {
+            if (rand.nextInt(6) == 0) {
+                pc.setCurrentHP(pc.getCurrentHP() - (2 * enemy.getAtk()));
+                enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + (2 * enemy.getAtk()) + " damage!");
+            }
+            else {
+                pc.setCurrentHP(pc.getCurrentHP() - enemy.getAtk());
+                enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + enemy.getAtk() + " damage!");
+            }
+            
+            if (pc.getCurrentHP() <= 0) {
+                // End Game
+            }
+            
+            if (rand.nextInt(6) == 0) {
+                enemy.setHP(enemy.getHP() - (2 * pc.getAtk()));
+                playerMovesLabel.setText(pc.getName() + " attacked " + enemy.getName() + " for " + (2 * pc.getAtk()) + " damage!");
+            }
+            else {
+                enemy.setHP(enemy.getHP() - pc.getAtk());
+                playerMovesLabel.setText(pc.getName() + " attacked " + enemy.getName() + " for " + pc.getAtk() + " damage!");
+            }
+            
+            if 
         }
-        if(e.getSource().equals(pReturn)){
-            atw.setVisible(false);
+        else if (e.getSource() == attack2Button) {
+            if (rand.nextInt(6) == 0) {
+                pc.setCurrentHP(pc.getCurrentHP() - (2 * enemy.getAtk()));
+                enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + (2 * enemy.getAtk()) + " damage!");
+            }
+            else {
+                pc.setCurrentHP(pc.getCurrentHP() - enemy.getAtk());
+                enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + enemy.getAtk() + " damage!");
+            }
+            
+            this.revalidate();
+            
+            if (pc.getCurrentHP() <= 0) {
+                // End Game
+            }
         }
-        if(e.getSource().equals(att1)){
-            int hp = Integer.parseInt(gobhp.getText());
-           hp = hp - 10;
-           gobhp.setText(String.valueOf(hp));
+        else if (e.getSource() == attack3Button) {
+            if (rand.nextInt(6) == 0) {
+                pc.setCurrentHP(pc.getCurrentHP() - (2 * enemy.getAtk()));
+                enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + (2 * enemy.getAtk()) + " damage!");
+            }
+            else {
+                pc.setCurrentHP(pc.getCurrentHP() - enemy.getAtk());
+                enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + enemy.getAtk() + " damage!");
+            }
+            
+            this.revalidate();
+            
+            if (pc.getCurrentHP() <= 0) {
+                // End Game
+            }
+            
         }
-          if(e.getSource().equals(att2)){
-           //int ph = 
+        else if (e.getSource() == attack4Button) {
+            if (rand.nextInt(6) == 0) {
+                pc.setCurrentHP(pc.getCurrentHP() - (2 * enemy.getAtk()));
+                enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + (2 * enemy.getAtk()) + " damage!");
+            }
+            else {
+                pc.setCurrentHP(pc.getCurrentHP() - enemy.getAtk());
+                enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + enemy.getAtk() + " damage!");
+            }
+            
+            this.revalidate();
+            
+            if (pc.getCurrentHP() <= 0) {
+                // End Game
+            }
+        }
     }
     
-}
 }
