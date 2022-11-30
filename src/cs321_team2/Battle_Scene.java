@@ -32,12 +32,15 @@ public class Battle_Scene extends JPanel implements ActionListener {
     private final JLabel playerHPNumLabel = new JLabel();
     private final JLabel playerFPLabel = new JLabel("FP:");
     private final JLabel playerFPNumLabel = new JLabel();
+    private final JLabel enemySpriteLabel = new JLabel();
     private final JButton attack1Button = new JButton();
     private final JButton attack2Button = new JButton();
     private final JButton attack3Button = new JButton();
     private final JButton attack4Button = new JButton();
     
     private final Random rand = new Random();
+    
+    private int attackBoostCounter = 0;
     
     public Battle_Scene(DungeonFrame parentFrame, PlayerCharacter pc, Enemy enemy){
         
@@ -75,9 +78,10 @@ public class Battle_Scene extends JPanel implements ActionListener {
         playerNameLabel.setText(pc.getName());
         enemyIconLabel.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\cs321_team2\\Enemies\\" + enemy.getName() + ".png"));
         playerIconLabel.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\cs321_team2\\Characters\\" + pc.getArchetype() + ".png"));
+        enemySpriteLabel.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\cs321_team2\\Enemies\\" + enemy.getName() + "_Battle.png"));
         enemyHPNumLabel.setText(String.valueOf(enemy.getHP()));
-        playerHPNumLabel.setText(String.valueOf(pc.getHP()));
-        playerFPNumLabel.setText(String.valueOf(pc.getFP()));
+        playerHPNumLabel.setText(String.valueOf(pc.getMaxHP()));
+        playerFPNumLabel.setText(String.valueOf(pc.getMaxFP()));
         
         addElements();
         addAttackButtons();
@@ -108,6 +112,9 @@ public class Battle_Scene extends JPanel implements ActionListener {
         enemyNameLabel.setBounds(880, 10, 120, 120);
         this.add(enemyNameLabel);
         
+        enemySpriteLabel.setBounds(940, 150, 180, 200);
+        this.add(enemySpriteLabel);
+        
         backgroundLabel.setBounds(10, 140, 1170, 380);
         this.add(backgroundLabel);
         
@@ -128,6 +135,8 @@ public class Battle_Scene extends JPanel implements ActionListener {
         
         playerFPNumLabel.setBounds(390, 600, 80, 60);
         this.add(playerFPNumLabel);
+        
+        
     }
     
     private void addAttackButtons() {
@@ -203,75 +212,116 @@ public class Battle_Scene extends JPanel implements ActionListener {
             if (rand.nextInt(6) == 0) {
                 pc.setCurrentHP(pc.getCurrentHP() - (2 * enemy.getAtk()));
                 enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + (2 * enemy.getAtk()) + " damage!");
+                playerHPNumLabel.setText(String.valueOf(pc.getCurrentHP()));
             }
             else {
                 pc.setCurrentHP(pc.getCurrentHP() - enemy.getAtk());
                 enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + enemy.getAtk() + " damage!");
-            }
-            
-            if (pc.getCurrentHP() <= 0) {
-                // End Game
+                playerHPNumLabel.setText(String.valueOf(pc.getCurrentHP()));
             }
             
             if (rand.nextInt(6) == 0) {
                 enemy.setHP(enemy.getHP() - (2 * pc.getAtk()));
                 playerMovesLabel.setText(pc.getName() + " attacked " + enemy.getName() + " for " + (2 * pc.getAtk()) + " damage!");
+                enemyHPNumLabel.setText(String.valueOf(enemy.getHP()));
             }
             else {
                 enemy.setHP(enemy.getHP() - pc.getAtk());
                 playerMovesLabel.setText(pc.getName() + " attacked " + enemy.getName() + " for " + pc.getAtk() + " damage!");
+                enemyHPNumLabel.setText(String.valueOf(enemy.getHP()));
             }
-            
-            // if 
         }
         else if (e.getSource() == attack2Button) {
             if (rand.nextInt(6) == 0) {
                 pc.setCurrentHP(pc.getCurrentHP() - (2 * enemy.getAtk()));
                 enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + (2 * enemy.getAtk()) + " damage!");
+                playerHPNumLabel.setText(String.valueOf(pc.getCurrentHP()));
             }
             else {
                 pc.setCurrentHP(pc.getCurrentHP() - enemy.getAtk());
                 enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + enemy.getAtk() + " damage!");
+                playerHPNumLabel.setText(String.valueOf(pc.getCurrentHP()));
             }
             
             this.revalidate();
             
-            if (pc.getCurrentHP() <= 0) {
-                // End Game
+            switch (pc.getArchetype()) {
+                case "Warrior" -> {
+                    attackBoostCounter = 4;
+                    pc.setAtk(pc.getAtk() + 10);
+                    pc.setCurrentFP(pc.getCurrentFP() - 4);
+                    playerMovesLabel.setText(pc.getName() + " increased their Attack for three turns!");
+                }
+                case "Mage" -> {
+                    int t = 0;
+                    for (int i = 0; i < 3; i++) {
+                        if (rand.nextInt(6) == 0) {
+                            enemy.setHP(enemy.getHP() - 12);
+                            t += 12;
+                        }
+                        else {
+                            enemy.setHP(enemy.getHP() - 6);
+                            t += 6;
+                        }
+                    }
+                    playerMovesLabel.setText(pc.getName() + " attacked " + enemy.getName() + " with Magic Missile for " + t + " damage!");
+                    enemyHPNumLabel.setText(String.valueOf(enemy.getHP()));
+                }
+                case "Paladin" -> {
+                    pc.setCurrentHP(pc.getCurrentHP() + (pc.getMaxHP() / 4));
+                    if (pc.getCurrentHP() > pc.getMaxHP()) {
+                        pc.setCurrentHP(pc.getMaxHP());
+                    }
+                    playerMovesLabel.setText(pc.getName() + " healed themselves!");
+                }
             }
+            
+            this.revalidate();
         }
         else if (e.getSource() == attack3Button) {
             if (rand.nextInt(6) == 0) {
                 pc.setCurrentHP(pc.getCurrentHP() - (2 * enemy.getAtk()));
                 enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + (2 * enemy.getAtk()) + " damage!");
+                playerHPNumLabel.setText(String.valueOf(pc.getCurrentHP()));
             }
             else {
                 pc.setCurrentHP(pc.getCurrentHP() - enemy.getAtk());
                 enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + enemy.getAtk() + " damage!");
+                playerHPNumLabel.setText(String.valueOf(pc.getCurrentHP()));
             }
             
             this.revalidate();
-            
-            if (pc.getCurrentHP() <= 0) {
-                // End Game
-            }
             
         }
         else if (e.getSource() == attack4Button) {
             if (rand.nextInt(6) == 0) {
                 pc.setCurrentHP(pc.getCurrentHP() - (2 * enemy.getAtk()));
                 enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + (2 * enemy.getAtk()) + " damage!");
+                playerHPNumLabel.setText(String.valueOf(pc.getCurrentHP()));
             }
             else {
                 pc.setCurrentHP(pc.getCurrentHP() - enemy.getAtk());
                 enemyMovesLabel.setText(enemy.getName() + " attacked " + pc.getName() + " for " + enemy.getAtk() + " damage!");
+                playerHPNumLabel.setText(String.valueOf(pc.getCurrentHP()));
             }
             
             this.revalidate();
             
-            if (pc.getCurrentHP() <= 0) {
-                // End Game
+        }
+        
+        if (attackBoostCounter >= 1) {
+            attackBoostCounter--;
+            if (attackBoostCounter == 0) {
+                pc.setAtk(pc.getAtk() - 10);
             }
+        }
+        
+        if (pc.getCurrentHP() <= 0) {
+            // End Game - Loss
+        }
+        
+        if (enemy.getHP() <= 0) {
+            // End Battle - Win
         }
     }
     

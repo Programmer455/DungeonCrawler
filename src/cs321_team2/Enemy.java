@@ -15,8 +15,8 @@ public class Enemy {
         switch (name) {
             case "Goblin" -> {
                 this.name = name;
-                HP = 20;
-                Atk = 3;
+                HP = 15;
+                Atk = 2;
                 XP = 50;
             }
             case "Hobgoblin" -> {
