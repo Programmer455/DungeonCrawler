@@ -222,7 +222,7 @@ public class Battle_Scene extends JPanel implements ActionListener {
                 playerMovesLabel.setText(pc.getName() + " attacked " + enemy.getName() + " for " + pc.getAtk() + " damage!");
             }
             
-            if 
+            // if 
         }
         else if (e.getSource() == attack2Button) {
             if (rand.nextInt(6) == 0) {
