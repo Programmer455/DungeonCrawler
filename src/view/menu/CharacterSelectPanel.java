@@ -1,6 +1,6 @@
 package view.menu;
 
-import model.PlayerCharacter;
+import cs321_team2.PlayerCharacter;
 
 import javax.swing.*;
 import java.awt.*;
